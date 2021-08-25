@@ -6,17 +6,18 @@ import Postitem from "./components/Postitem";
 
 function App() {
 
-    const [likes, setLikes] = useState(0);
-    const [value, setValue] = useState('TEXT IN INPUT');
-
+    const [posts, setPosts] = useState([
+        {id: 1, title: 'JS', body: 'Some description about JS'},
+        {id: 2, title: 'PHP', body: 'Some description about PHP'},
+        {id: 3, title: 'C++', body: 'Some description about C++'},
+    ]);
 
 
     return (
         <div className="App">
-            <Postitem post={{id: 1, title: 'JS', body: 'Some description about JS'}}/>
-            <Postitem post={{id: 2, title: 'Python', body: 'Some description about Python'}}/>
-            <Postitem post={{id: 3, title: 'PHP', body: 'Some description about PHP'}}/>
-            <Postitem post={{id: 4, title: 'C++', body: 'Some description about C++'}}/>
+            {posts.map(post =>
+                <Postitem  post={post} key={post.id}/>
+            )}
 
         </div>
     );
