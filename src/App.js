@@ -13,10 +13,11 @@ function App() {
 
     return (
         <div className="App">
-            <Postitem/>
-            <Postitem/>
-            <Postitem/>
-            <Postitem/>
+            <Postitem post={{id: 1, title: 'JS', body: 'Some description about JS'}}/>
+            <Postitem post={{id: 2, title: 'Python', body: 'Some description about Python'}}/>
+            <Postitem post={{id: 3, title: 'PHP', body: 'Some description about PHP'}}/>
+            <Postitem post={{id: 4, title: 'C++', body: 'Some description about C++'}}/>
+
         </div>
     );
 }
