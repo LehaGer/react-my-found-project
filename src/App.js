@@ -32,6 +32,11 @@ function App() {
 
     return (
         <div className="App">
+            <form>
+                <input type="text" placeholder={"name of post"}/>
+                <input type="text" placeholder={"description of post"}/>
+                <button>Create post</button>
+            </form>
             <PostList posts={postsJS} title={"Posts list about JS"}/>
             <PostList posts={postsPHP} title={"Posts list about PHP"}/>
             <PostList posts={postsC} title={"Posts list about C++"}/>
