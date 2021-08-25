@@ -5,8 +5,6 @@ import MyInput from "./components/UI/input/MyInput";
 function App() {
   return (
     <div className="App">
-      <MyButton disabled>Create new post</MyButton>
-      <MyInput/>
     </div>
   );
 }
