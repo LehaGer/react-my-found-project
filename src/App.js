@@ -7,13 +7,14 @@ import PostList from "./components/PostList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput";
 import PostForm from "./components/PostForm";
+import MySelect from "./components/UI/select/MySelect";
 
 function App() {
 
     const [postsJS, setPostsJS] = useState([
-        {id: 1, title: 'JS', body: 'Some description about JS'},
+        {id: 1, title: 'JS1', body: 'Some description about JSf'},
         {id: 2, title: 'JS', body: 'Some description about JS'},
-        {id: 3, title: 'JS', body: 'Some description about JS'},
+        {id: 3, title: 'JSd', body: 'Some description about JSi'},
     ]);
     const [postsPHP, setPostsPHP] = useState([
         {id: 1, title: 'PHP', body: 'Some description about PHP'},
@@ -31,6 +32,8 @@ function App() {
         {id: 3, title: 'Python', body: 'Some description about Python'},
     ]);
 
+    const [selectedSort, setSelectedSort] = useState('');
+
     /*для неуправляемого компонента*/
     //const bodyInputRef = useRef();
 
@@ -42,15 +45,25 @@ function App() {
         setPostsJS(postsJS.filter(p => p.id !== post.id))
     };
 
+    const sortPosts = (sort) => {
+        setSelectedSort(sort);
+        setPostsJS([...postsJS].sort((a,b) => a[sort].localeCompare(b[sort])));
+    };
+
     return (
         <div className="App">
             <PostForm create={addPost}/>
             <hr style={{width: "100%", margin: "15px 0"}}/>
             <div>
-                <select>
-                    <option value="value-1">by name</option>
-                    <option value="value-2">by description</option>
-                </select>
+                <MySelect
+                    defaultValue={"sorting"}
+                    value={selectedSort}
+                    options={[
+                        {name: "by title", value: "title"},
+                        {name: "by body", value: "body"}
+                    ]}
+                    onChangeFn={(sortingType) => sortPosts(sortingType)}
+                />
             </div>
             {postsJS.length
                 ?
