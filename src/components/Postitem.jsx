@@ -2,7 +2,8 @@ import React from 'react';
 
 const Postitem = (props) => {
 
-    let {id, title, body} = props.post;
+    let id = props.number;
+    let {title, body} = props.post;
 
     return (
         <div className="post">

@@ -10,24 +10,24 @@ import MyInput from "./components/UI/input/MyInput";
 function App() {
 
     const [postsJS, setPostsJS] = useState([
-        {id: 1, title: 'JS', body: 'Some description about JS'},
-        {id: 2, title: 'JS', body: 'Some description about JS'},
-        {id: 3, title: 'JS', body: 'Some description about JS'},
+        {title: 'JS', body: 'Some description about JS'},
+        {title: 'JS', body: 'Some description about JS'},
+        {title: 'JS', body: 'Some description about JS'},
     ]);
     const [postsPHP, setPostsPHP] = useState([
-        {id: 1, title: 'PHP', body: 'Some description about PHP'},
-        {id: 2, title: 'PHP', body: 'Some description about PHP'},
-        {id: 3, title: 'PHP', body: 'Some description about PHP'},
+        {title: 'PHP', body: 'Some description about PHP'},
+        {title: 'PHP', body: 'Some description about PHP'},
+        {title: 'PHP', body: 'Some description about PHP'},
     ]);
     const [postsC, setPostsC] = useState([
-        {id: 1, title: 'C++', body: 'Some description about C++'},
-        {id: 2, title: 'C++', body: 'Some description about C++'},
-        {id: 3, title: 'C++', body: 'Some description about C++'},
+        {title: 'C++', body: 'Some description about C++'},
+        {title: 'C++', body: 'Some description about C++'},
+        {title: 'C++', body: 'Some description about C++'},
     ]);
     const [postsPython, setPostsPython] = useState([
-        {id: 1, title: 'Python', body: 'Some description about Python'},
-        {id: 2, title: 'Python', body: 'Some description about Python'},
-        {id: 3, title: 'Python', body: 'Some description about Python'},
+        {title: 'Python', body: 'Some description about Python'},
+        {title: 'Python', body: 'Some description about Python'},
+        {title: 'Python', body: 'Some description about Python'},
     ]);
 
     const [title, setTitle] = useState('Default title');
@@ -41,6 +41,8 @@ function App() {
         e.preventDefault();
         /*для неуправляемого компонента*/
         //*console.log(bodyInputRef.current.value);
+        setTitle('');
+        setBody('');
 
     }
 
