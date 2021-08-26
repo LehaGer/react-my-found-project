@@ -4,6 +4,8 @@ import ClassCounter from "./components/ClassCounter";
 import './styles/App.css';
 import Postitem from "./components/Postitem";
 import PostList from "./components/PostList";
+import MyButton from "./components/UI/button/MyButton";
+import MyInput from "./components/UI/input/MyInput";
 
 function App() {
 
