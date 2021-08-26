@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import Counter from "./components/Counter";
 import ClassCounter from "./components/ClassCounter";
 import './styles/App.css';
@@ -30,14 +30,35 @@ function App() {
         {id: 3, title: 'Python', body: 'Some description about Python'},
     ]);
 
+    const [title, setTitle] = useState('Default title');
 
+    const bodyInputRef = useRef();
+
+    const addNewPost = (e) => {
+        //setPostsJS(...postsJS, {id: 4, title: title, body: description});
+        e.preventDefault();
+        //setPostsJS(postsJS.push({id: 4, title: title, body: description}))
+        console.log(title);
+        console.log(bodyInputRef.current.value);
+    }
 
     return (
         <div className="App">
             <form>
-                <input type="text" placeholder={"name of post"}/>
-                <input type="text" placeholder={"description of post"}/>
-                <button>Create post</button>
+                {/*Управляемый компонент*/}
+                <MyInput
+                    type="text"
+                    placeholder={"name of post"}
+                    value={title}
+                    onChange={e => setTitle(e.target.value)}
+                />
+                {/*Неуправляемый компонент*/}
+                <MyInput
+                    type="text"
+                    placeholder={"description of post"}
+                    ref={bodyInputRef}
+                />
+                <MyButton onClick={addNewPost}>Create post</MyButton>
             </form>
             <PostList posts={postsJS} title={"Posts list about JS"}/>
             <PostList posts={postsPHP} title={"Posts list about PHP"}/>
