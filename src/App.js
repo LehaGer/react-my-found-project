@@ -45,7 +45,12 @@ function App() {
     return (
         <div className="App">
             <PostForm create={addPost}/>
-            <PostList posts={postsJS} title={"Posts list about JS"} deleting={deletePost}/>
+            {postsJS.length
+                ?
+                <PostList posts={postsJS} title={"Posts list about JS"} deleting={deletePost}/>
+                :
+                <h1 style={{textAlign: 'center', marginTop: '50px'}}>Posts about JS not found</h1>
+            }
             <PostList posts={postsPHP} title={"Posts list about PHP"}/>
             <PostList posts={postsC} title={"Posts list about C++"}/>
             <PostList posts={postsPython} title={"Posts list about Python"}/>
