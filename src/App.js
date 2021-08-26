@@ -31,15 +31,17 @@ function App() {
     ]);
 
     const [title, setTitle] = useState('Default title');
+    const [body, setBody] = useState('Default body');
 
-    const bodyInputRef = useRef();
+    /*для неуправляемого компонента*/
+    //const bodyInputRef = useRef();
 
     const addNewPost = (e) => {
-        //setPostsJS(...postsJS, {id: 4, title: title, body: description});
+        setPostsJS([...postsJS, {id: Date.now(), title: title, body: body}]);
         e.preventDefault();
-        //setPostsJS(postsJS.push({id: 4, title: title, body: description}))
-        console.log(title);
-        console.log(bodyInputRef.current.value);
+        /*для неуправляемого компонента*/
+        //*console.log(bodyInputRef.current.value);
+
     }
 
     return (
@@ -52,11 +54,14 @@ function App() {
                     value={title}
                     onChange={e => setTitle(e.target.value)}
                 />
-                {/*Неуправляемый компонент*/}
+                {/*Управляемый компонент, был неуправляемым*/}
                 <MyInput
                     type="text"
                     placeholder={"description of post"}
-                    ref={bodyInputRef}
+                    /*для неуправляемого компонента*/
+                    //ref={bodyInputRef}
+                    value={body}
+                    onChange={e => setBody(e.target.value)}
                 />
                 <MyButton onClick={addNewPost}>Create post</MyButton>
             </form>
