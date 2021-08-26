@@ -40,7 +40,7 @@ function App() {
         setPostsJS([...postsJS, {title: post.title, body: post.body}]);
         /*для неуправляемого компонента*/
         //*console.log(bodyInputRef.current.value);
-        setPost({...post, title: '', body: ''});
+        setPost({title: '', body: ''});
 
     };
 
