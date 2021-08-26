@@ -11,43 +11,44 @@ import PostForm from "./components/PostForm";
 function App() {
 
     const [postsJS, setPostsJS] = useState([
-        {title: 'JS', body: 'Some description about JS'},
-        {title: 'JS', body: 'Some description about JS'},
-        {title: 'JS', body: 'Some description about JS'},
+        {id: 1, title: 'JS', body: 'Some description about JS'},
+        {id: 2, title: 'JS', body: 'Some description about JS'},
+        {id: 3, title: 'JS', body: 'Some description about JS'},
     ]);
     const [postsPHP, setPostsPHP] = useState([
-        {title: 'PHP', body: 'Some description about PHP'},
-        {title: 'PHP', body: 'Some description about PHP'},
-        {title: 'PHP', body: 'Some description about PHP'},
+        {id: 1, title: 'PHP', body: 'Some description about PHP'},
+        {id: 2, title: 'PHP', body: 'Some description about PHP'},
+        {id: 3, title: 'PHP', body: 'Some description about PHP'},
     ]);
     const [postsC, setPostsC] = useState([
-        {title: 'C++', body: 'Some description about C++'},
-        {title: 'C++', body: 'Some description about C++'},
-        {title: 'C++', body: 'Some description about C++'},
+        {id: 1, title: 'C++', body: 'Some description about C++'},
+        {id: 2, title: 'C++', body: 'Some description about C++'},
+        {id: 3, title: 'C++', body: 'Some description about C++'},
     ]);
     const [postsPython, setPostsPython] = useState([
-        {title: 'Python', body: 'Some description about Python'},
-        {title: 'Python', body: 'Some description about Python'},
-        {title: 'Python', body: 'Some description about Python'},
+        {id: 1, title: 'Python', body: 'Some description about Python'},
+        {id: 2, title: 'Python', body: 'Some description about Python'},
+        {id: 3, title: 'Python', body: 'Some description about Python'},
     ]);
-
-
 
     /*для неуправляемого компонента*/
     //const bodyInputRef = useRef();
 
-    const createPosts = (newPost) => {
+    const addPost = (newPost) => {
         setPostsJS([...postsJS, newPost])
+    };
+
+    const deletePost = (post) => {
+        setPostsJS(postsJS.filter(p => p.id !== post.id))
     };
 
     return (
         <div className="App">
-            <PostForm create={createPosts}/>
-            <PostList posts={postsJS} title={"Posts list about JS"}/>
+            <PostForm create={addPost}/>
+            <PostList posts={postsJS} title={"Posts list about JS"} deleting={deletePost}/>
             <PostList posts={postsPHP} title={"Posts list about PHP"}/>
             <PostList posts={postsC} title={"Posts list about C++"}/>
             <PostList posts={postsPython} title={"Posts list about Python"}/>
-
         </div>
     );
 }

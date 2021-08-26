@@ -11,7 +11,7 @@ const PostForm = ({create}) => {
         /*для неуправляемого компонента*/
         //*console.log(bodyInputRef.current.value);
         setPost({title: '', body: ''});
-        create(post);
+        create({id: Date.now(), ...post });
     };
 
     return (
