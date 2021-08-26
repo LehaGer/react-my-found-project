@@ -45,6 +45,13 @@ function App() {
     return (
         <div className="App">
             <PostForm create={addPost}/>
+            <hr style={{width: "100%", margin: "15px 0"}}/>
+            <div>
+                <select>
+                    <option value="value-1">by name</option>
+                    <option value="value-2">by description</option>
+                </select>
+            </div>
             {postsJS.length
                 ?
                 <PostList posts={postsJS} title={"Posts list about JS"} deleting={deletePost}/>
