@@ -30,21 +30,19 @@ function App() {
         {title: 'Python', body: 'Some description about Python'},
     ]);
 
-    const [title, setTitle] = useState('Default title');
-    const [body, setBody] = useState('Default body');
+    const [post, setPost] = useState({title: '', body: ''});
 
     /*для неуправляемого компонента*/
     //const bodyInputRef = useRef();
 
     const addNewPost = (e) => {
-        setPostsJS([...postsJS, {id: Date.now(), title: title, body: body}]);
         e.preventDefault();
+        setPostsJS([...postsJS, {title: post.title, body: post.body}]);
         /*для неуправляемого компонента*/
         //*console.log(bodyInputRef.current.value);
-        setTitle('');
-        setBody('');
+        setPost({...post, title: '', body: ''});
 
-    }
+    };
 
     return (
         <div className="App">
@@ -53,8 +51,8 @@ function App() {
                 <MyInput
                     type="text"
                     placeholder={"name of post"}
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
+                    value={post.title}
+                    onChange={e =>setPost({...post, title: e.target.value})}
                 />
                 {/*Управляемый компонент, был неуправляемым*/}
                 <MyInput
@@ -62,8 +60,8 @@ function App() {
                     placeholder={"description of post"}
                     /*для неуправляемого компонента*/
                     //ref={bodyInputRef}
-                    value={body}
-                    onChange={e => setBody(e.target.value)}
+                    value={post.body}
+                    onChange={e => setPost({...post, body: e.target.value})}
                 />
                 <MyButton onClick={addNewPost}>Create post</MyButton>
             </form>
