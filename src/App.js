@@ -37,7 +37,7 @@ function App() {
 
     const addNewPost = (e) => {
         e.preventDefault();
-        setPostsJS([...postsJS, {title: post.title, body: post.body}]);
+        setPostsJS([...postsJS, {...post}]);
         /*для неуправляемого компонента*/
         //*console.log(bodyInputRef.current.value);
         setPost({title: '', body: ''});
