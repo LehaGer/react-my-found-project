@@ -9,6 +9,7 @@ import MyInput from "./components/UI/input/MyInput";
 import PostForm from "./components/PostForm";
 import MySelect from "./components/UI/select/MySelect";
 import PostFilter from "./components/PostFilter";
+import MyModal from "./components/UI/MyModal/MyModal";
 
 function App() {
 
@@ -33,7 +34,9 @@ function App() {
         {id: 3, title: 'Python', body: 'Some description about Python'},
     ]);
 
-    const [filter, setFilter] = useState({sort: '', query: ''})
+    const [filter, setFilter] = useState({sort: '', query: ''});
+
+    const [modal, setModal] = useState(false);
 
     /*для неуправляемого компонента*/
     //const bodyInputRef = useRef();
@@ -50,7 +53,8 @@ function App() {
     }, [filter.query, sortedPosts])
 
     const addPost = (newPost) => {
-        setPostsJS([...postsJS, newPost])
+        setPostsJS([...postsJS, newPost]);
+        setModal(false);
     };
 
     const deletePost = (post) => {
@@ -61,7 +65,12 @@ function App() {
 
     return (
         <div className="App">
-            <PostForm create={addPost}/>
+            <MyButton onClick={() => setModal(true)} style={{marginTop: '20px'}}>
+                create new post
+            </MyButton>
+            <MyModal visible={modal} setVisible={setModal}>
+                <PostForm create={addPost}/>
+            </MyModal>
             <hr style={{width: "100%", margin: "15px 0"}}/>
             <PostFilter
                 filter={filter}
