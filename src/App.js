@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useMemo} from 'react';
 import Counter from "./components/Counter";
 import ClassCounter from "./components/ClassCounter";
 import './styles/App.css';
@@ -34,8 +34,21 @@ function App() {
 
     const [selectedSort, setSelectedSort] = useState('');
 
+    const [searchQuery, setSearchQuery] = useState('');
+
     /*для неуправляемого компонента*/
     //const bodyInputRef = useRef();
+
+    const sortedPosts = useMemo(() => {
+        if(selectedSort){
+            return [...postsJS].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
+        }
+        return postsJS;
+    }, [selectedSort, postsJS]);
+
+    const sortedAndSearchedPosts = useMemo(() => {
+        return sortedPosts.filter(postsJS => postsJS.title.toLowerCase().includes(searchQuery));
+    }, [searchQuery, sortedPosts])
 
     const addPost = (newPost) => {
         setPostsJS([...postsJS, newPost])
@@ -47,27 +60,31 @@ function App() {
 
     const sortPosts = (sort) => {
         setSelectedSort(sort);
-        setPostsJS([...postsJS].sort((a,b) => a[sort].localeCompare(b[sort])));
     };
+
+    //const sortedPosts = geSortedPosts();
 
     return (
         <div className="App">
             <PostForm create={addPost}/>
             <hr style={{width: "100%", margin: "15px 0"}}/>
-            <div>
-                <MySelect
-                    defaultValue={"sorting"}
-                    value={selectedSort}
-                    options={[
-                        {name: "by title", value: "title"},
-                        {name: "by body", value: "body"}
-                    ]}
-                    onChangeFn={(sortingType) => sortPosts(sortingType)}
-                />
-            </div>
-            {postsJS.length
+            <MyInput
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+            />
+            <MySelect
+                defaultValue={"sorting"}
+                value={selectedSort}
+                options={[
+                    {name: "by title", value: "title"},
+                    {name: "by body", value: "body"}
+                ]}
+                onChangeFn={(sortingType) => sortPosts(sortingType)}
+            />
+            {sortedAndSearchedPosts.length
                 ?
-                <PostList posts={postsJS} title={"Posts list about JS"} deleting={deletePost}/>
+                <PostList posts={sortedAndSearchedPosts} title={"Posts list about JS"} deleting={deletePost}/>
                 :
                 <h1 style={{textAlign: 'center', marginTop: '50px'}}>Posts about JS not found</h1>
             }
