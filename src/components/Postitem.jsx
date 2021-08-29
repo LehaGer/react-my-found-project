@@ -10,7 +10,7 @@ const Postitem = (props) => {
     return (
         <div className="post">
             <div className="post__content">
-                <strong>{id}. {title}</strong>
+                <strong>{props.post.id}. {title}</strong>
                 <div>
                     {body}
                 </div>

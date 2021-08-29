@@ -12,7 +12,7 @@ const PostList = ({posts, title, deleting}) => {
     }
 
     return (
-        <div>
+        <div style={{marginBottom: '20px'}}>
             <h1 style={{textAlign: 'center', marginTop: '50px'}}>{title}</h1>
             <TransitionGroup>
                     {posts.map((post, index) =>
@@ -25,7 +25,6 @@ const PostList = ({posts, title, deleting}) => {
                         </CSSTransition>
                     )}
             </TransitionGroup>
-
         </div>
     );
 };
