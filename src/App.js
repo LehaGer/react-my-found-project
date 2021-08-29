@@ -8,6 +8,7 @@ import MyModal from "./components/UI/MyModal/MyModal";
 import {usePosts} from "./hooks/usePosts";
 import axios from "axios";
 import PostService from "./API/PostService";
+import Loader from "./components/UI/Loader/Loader";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
     const [filter, setFilter] = useState({sort: '', query: ''});
     const [modal, setModal] = useState(false);
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+    const [isPostsLoading, setPostsLoading] = useState(false);
 
     useEffect(() => {
         fetchPosts();
@@ -29,8 +31,12 @@ function App() {
     };
 
     async function fetchPosts() {
-        const posts = await PostService.getAll();
-        setPosts(posts)
+        setPostsLoading(true);
+        setTimeout(async () => {
+            const posts = await PostService.getAll();
+            setPosts(posts);
+            setPostsLoading(false);
+        }, 1000);
     }
 
     const deletePost = (post) => {
@@ -50,7 +56,10 @@ function App() {
                 filter={filter}
                 setFilter={setFilter}
             />
-            <PostList posts={sortedAndSearchedPosts} title={"Posts list about JS"} deleting={deletePost}/>
+            {true
+                ? <div style={{display: 'flex', justifyContent: "center", marginTop: '150px'}}><Loader/></div>
+                : <PostList posts={sortedAndSearchedPosts} title={"Posts list about JS"} deleting={deletePost}/>
+            }
         </div>
     );
 }
