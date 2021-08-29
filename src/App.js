@@ -1,4 +1,4 @@
-import React, {useRef, useState, useMemo} from 'react';
+import React, {useRef, useState, useMemo, useEffect} from 'react';
 import './styles/App.css';
 import PostList from "./components/PostList";
 import MyButton from "./components/UI/button/MyButton";
@@ -6,21 +6,19 @@ import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
 import MyModal from "./components/UI/MyModal/MyModal";
 import {usePosts} from "./hooks/usePosts";
+import axios from "axios";
+import PostService from "./API/PostService";
 
 function App() {
 
-    const [posts, setPosts] = useState([
-        {id: 1, title: 'JS1', body: 'Some description about JSg'},
-        {id: 2, title: 'JS2', body: 'Some description about JSf'},
-        {id: 3, title: 'JS3', body: 'Some description about JSie'},
-        {id: 4, title: 'JS4', body: 'Some description about JSd'},
-        {id: 5, title: 'JS5', body: 'Some description about JSc'},
-        {id: 6, title: 'JS6', body: 'Some description about JSb'},
-        {id: 7, title: 'JS7', body: 'Some description about JSa'},
-    ]);
+    const [posts, setPosts] = useState([]);
     const [filter, setFilter] = useState({sort: '', query: ''});
     const [modal, setModal] = useState(false);
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+
+    useEffect(() => {
+        fetchPosts();
+    },[]);
 
     /*для неуправляемого компонента*/
     //const bodyInputRef = useRef();
@@ -30,11 +28,14 @@ function App() {
         setModal(false);
     };
 
+    async function fetchPosts() {
+        const posts = await PostService.getAll();
+        setPosts(posts)
+    }
+
     const deletePost = (post) => {
         setPosts(posts.filter(p => p.id !== post.id))
     };
-
-    //const sortedPosts = geSortedPosts();
 
     return (
         <div className="App">
