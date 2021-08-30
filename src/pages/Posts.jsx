@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {usePosts} from "../hooks/usePosts";
 import {useFetching} from "../hooks/useFetching";
 import PostService from "../API/PostService";
@@ -10,6 +10,7 @@ import PostFilter from "../components/PostFilter";
 import PostList from "../components/PostList";
 import Pagination from "../components/UI/pagination/Pagination";
 import Loader from "../components/UI/Loader/Loader";
+import {useObserver} from "../hooks/useObserver";
 
 function Posts() {
 
@@ -20,19 +21,22 @@ function Posts() {
     const [totalPages, setTotalPages] = useState(0);
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
-
-
+    const lastElement = useRef();
 
     const [fetchPosts, isPostsLoading, postError] = useFetching(async (limit, page) => {
         const response = await PostService.getAll(limit, page);
-        setPosts(response.data);
+        setPosts([...posts, ...response.data]);
         const totalCount = response.headers['x-total-count'];
         setTotalPages(getPagecount(totalCount, limit));
     });
 
+    useObserver(lastElement, page < totalPages, isPostsLoading, () => {
+        setPage(page + 1)
+    });
+
     useEffect(() => {
         fetchPosts(limit, page);
-    },[]);
+    },[page]);
 
     /*для неуправляемого компонента*/
     //const bodyInputRef = useRef();
@@ -67,9 +71,11 @@ function Posts() {
             {postError &&
             <h1>Error ${postError}</h1>
             }
-            {isPostsLoading
-                ? <div style={{display: 'flex', justifyContent: "center", marginTop: '100px', marginBottom: '100px'}}><Loader/></div>
-                : <PostList posts={sortedAndSearchedPosts} title={"Posts list about JS"} deleting={deletePost}/>
+            <PostList posts={sortedAndSearchedPosts} title={"Posts list about JS"} deleting={deletePost}/>
+            <div ref={lastElement} style={{height: 20, background: 'red'}}/>
+            {isPostsLoading &&
+            <div style={{display: 'flex', justifyContent: "center", marginTop: '100px', marginBottom: '100px'}}>
+                <Loader/></div>
             }
             <Pagination
                 page={page}
