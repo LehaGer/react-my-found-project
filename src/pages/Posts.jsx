@@ -68,7 +68,7 @@ function Posts() {
             <h1>Error ${postError}</h1>
             }
             {isPostsLoading
-                ? <div style={{display: 'flex', justifyContent: "center", marginTop: '150px'}}><Loader/></div>
+                ? <div style={{display: 'flex', justifyContent: "center", marginTop: '100px', marginBottom: '100px'}}><Loader/></div>
                 : <PostList posts={sortedAndSearchedPosts} title={"Posts list about JS"} deleting={deletePost}/>
             }
             <Pagination

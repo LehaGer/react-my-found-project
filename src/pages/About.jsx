@@ -2,9 +2,9 @@ import React from 'react';
 
 const About = () => {
     return (
-        <div>
-            Something about the site
-        </div>
+        <h1 style={{marginTop: '50px'}}>
+            Something about this site
+        </h1>
     );
 };
 

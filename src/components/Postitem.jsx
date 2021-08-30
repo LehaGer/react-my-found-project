@@ -1,22 +1,27 @@
 import React from 'react';
 import MyButton from "./UI/button/MyButton";
+import {useHistory} from 'react-router-dom';
 
 const Postitem = (props) => {
-
-    let id = props.number;
-    let {title, body} = props.post;
-    let deleting = props.deleting;
+    const router = useHistory();
 
     return (
         <div className="post">
             <div className="post__content">
-                <strong>{props.post.id}. {title}</strong>
+                <strong>{props.post.id}. {props.post.title}</strong>
                 <div>
-                    {body}
+                    {props.post.body}
                 </div>
             </div>
             <div className="post__btns">
-                <MyButton onClick={() => deleting(props.post)}>Delete</MyButton>
+                <MyButton
+                    onClick={() => router.push('/posts/' + props.post.id)}>
+                    Open
+                </MyButton>
+                <MyButton
+                    onClick={() => props.deleting(props.post)}>
+                    Delete
+                </MyButton>
             </div>
         </div>
     );
