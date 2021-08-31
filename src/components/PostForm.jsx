@@ -10,8 +10,9 @@ const PostForm = ({create}) => {
         e.preventDefault();
         /*для неуправляемого компонента*/
         //*console.log(bodyInputRef.current.value);
+
+        create({...post, id: Date.now()});
         setPost({title: '', body: ''});
-        create({id: Date.now(), ...post });
     };
 
     return (
@@ -19,14 +20,14 @@ const PostForm = ({create}) => {
             {/*Управляемый компонент*/}
             <MyInput
                 type="text"
-                placeholder={"name of post"}
+                placeholder="name of post"
                 value={post.title}
                 onChange={e =>setPost({...post, title: e.target.value})}
             />
             {/*Управляемый компонент, был неуправляемым*/}
             <MyInput
                 type="text"
-                placeholder={"description of post"}
+                placeholder="description of post"
                 /*для неуправляемого компонента*/
                 //ref={bodyInputRef}
                 value={post.body}

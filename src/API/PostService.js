@@ -4,7 +4,7 @@ export default class PostService {
     static async getAll(limit = 10, page = 1) {
         const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
             params: {
-                _lemet: limit,
+                _limit: limit,
                 _page: page
             }
         });
@@ -12,12 +12,12 @@ export default class PostService {
     }
 
     static async getById(id) {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts/' + id)
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts/' + id);
         return response;
     }
 
     static async getCommentsByPostId(id) {
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`);
         return response;
     }
 }

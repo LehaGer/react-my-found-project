@@ -11,13 +11,13 @@ const PostFilter = ({filter, setFilter}) => {
                 onChange={e => setFilter({...filter, query: e.target.value})}
             />
             <MySelect
-                defaultValue={"sorting"}
+                defaultValue="sorting"
                 value={filter.sort}
                 options={[
                     {name: "by title", value: "title"},
                     {name: "by body", value: "body"}
                 ]}
-                onChangeFn={(sortingType) => setFilter({...filter, sort: sortingType})}
+                onChange={(sortingType) => setFilter({...filter, sort: sortingType})}
             />
         </div>
     );

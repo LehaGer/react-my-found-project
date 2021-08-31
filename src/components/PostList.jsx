@@ -1,7 +1,6 @@
 import React from 'react';
-import Postitem from "./Postitem";
-import {TransitionGroup} from "react-transition-group";
-import CSSTransition from "react-transition-group/cjs/CSSTransition";
+import PostItem from "./PostItem";
+import {TransitionGroup, CSSTransition} from "react-transition-group";
 
 const PostList = ({posts, title, deleting}) => {
 
@@ -21,7 +20,7 @@ const PostList = ({posts, title, deleting}) => {
                             timeout={150}
                             classNames="post"
                         >
-                            <Postitem number={index + 1} post={post} deleting={deleting}/>
+                            <PostItem number={index + 1} post={post} deleting={deleting}/>
                         </CSSTransition>
                     )}
             </TransitionGroup>
